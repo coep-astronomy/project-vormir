@@ -41,35 +41,29 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           eslint_flags: "client/"
 
-  prettier:
-    name: Prettier Check
-    runs-on: ubuntu-latest
-    if: github.event.review.state == 'approved'
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
+  # prettier:
+  #   name: Prettier Check
+  #   runs-on: ubuntu-latest
+  #   if: github.event.review.state == 'approved'
+  #   steps:
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v2
+  #       with:
+  #         ref: ${{ github.head_ref }}
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: "14"
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: "14"
 
-      - name: Install Dependencies
-        run: cp client/package.json ./ && yarn install
+  #     - name: Install Dependencies
+  #       run: cp client/package.json ./ && yarn install
 
-      # - name: Prettify code
-      #   uses: creyD/prettier_action@dev
-      #   with:
-      #     prettier_options: -c ./client/.prettierrc
-      #     file_pattern: ./client/.
-      #     dry: true
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Run linters
-        uses: wearerequired/lint-action@v1
-        with:
-          prettier: true
-          prettier_args: "-c ./client/.prettierrc ./client/."
+  #     - name: Prettify code
+  #       uses: creyD/prettier_action@dev
+  #       with:
+  #         prettier_options: -c ./client/.prettierrc
+  #         file_pattern: ./client/.
+  #         dry: true
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
