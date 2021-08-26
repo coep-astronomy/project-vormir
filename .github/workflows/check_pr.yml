@@ -4,19 +4,6 @@ on:
   pull_request_review:
     types: [submitted]
 
-permissions:
-  actions: read
-  checks: read
-  contents: none
-  deployments: none
-  issues: write
-  discussions: read
-  packages: none
-  pull-requests: write
-  repository-projects: read
-  security-events: read
-  statuses: read
-
 jobs:
   eslint:
     name: ESLint Check
@@ -60,8 +47,8 @@ jobs:
       - name: Run Prettier
         id: prettier_run
         run: |
-          echo "::set-output name=prettier_output::$(npx prettier --list-different ./client/)"
-          echo "$(npx prettier --list-different ./. > prettier.txt)"
+          echo "::set-output name=prettier_output::$(npx prettier --list-different ./client/.)"
+          echo "$(npx prettier --list-different ./client/. > prettier.txt)"
       - name: Comment on PR
         if: contains(${{ steps.prettier_run.outputs.prettier_output }}, '.');
         uses: actions/github-script@v3
