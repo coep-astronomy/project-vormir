@@ -62,6 +62,7 @@ jobs:
       - name: Prettify code
         uses: creyD/prettier_action@v3.3
         with:
+          prettier_options: -c ./client/.prettierrc
           file_pattern: ./client/.
           dry: true
         env:
