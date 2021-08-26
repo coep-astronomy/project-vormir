@@ -59,11 +59,17 @@ jobs:
       - name: Install Dependencies
         run: cp client/package.json ./ && yarn install
 
-      - name: Prettify code
-        uses: creyD/prettier_action@dev
+      # - name: Prettify code
+      #   uses: creyD/prettier_action@dev
+      #   with:
+      #     prettier_options: -c ./client/.prettierrc
+      #     file_pattern: ./client/.
+      #     dry: true
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run linters
+        uses: wearerequired/lint-action@v1
         with:
-          prettier_options: -c ./client/.prettierrc
-          file_pattern: ./client/.
-          dry: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          prettier: true
+          prettier_args: "-c ./client/.prettierrc ./client/."
